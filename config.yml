@@ -1,0 +1,11 @@
+local:
+  server:
+    port: 8080
+  postgre:
+    dsn: "host=localhost user=postgres password=secret dbname=mydb port=5432 sslmode=disable"
+
+prod:
+  server:
+    port: 80
+  postgre:
+    dsn: "host=localhost user=postgres password=secret dbname=mydb port=5432 sslmode=disable"
