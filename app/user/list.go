@@ -21,7 +21,7 @@ func NewUserListHandler(repository domain.UserRepository) *UserListHandler {
 }
 
 func (h *UserListHandler) Handle(ctx context.Context, request *UserListRequest) (*UserListResponse, error) {
-	users, err := h.repository.List()
+	users, err := h.repository.List(ctx)
 	if err != nil {
 		return nil, err
 	}

@@ -1,7 +1,9 @@
 package domain
 
+import "context"
+
 type UserRepository interface {
-	Create(user *User) error
-	Get(id string) (*User, error)
-	List() ([]User, error)
+	Create(ctx context.Context, user *User) error
+	Get(ctx context.Context, id string) (*User, error)
+	List(ctx context.Context) ([]User, error)
 }

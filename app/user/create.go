@@ -41,7 +41,7 @@ func (h *UserCreateHandler) Handle(ctx context.Context, request *UserCreateReque
 		Password:  hashed,
 	}
 
-	if err := h.repository.Create(user); err != nil {
+	if err := h.repository.Create(ctx, user); err != nil {
 		return nil, err
 	}
 

@@ -23,7 +23,7 @@ func NewUserGetHandler(repository domain.UserRepository) *UserGetHandler {
 }
 
 func (h *UserGetHandler) Handle(ctx context.Context, request *UserGetRequest) (*UserGetResponse, error) {
-	user, err := h.repository.Get(request.Id)
+	user, err := h.repository.Get(ctx, request.Id)
 	if err != nil {
 		return nil, err
 	}
