@@ -11,7 +11,7 @@ type UserRepositoryAdapter struct {
 	db *gorm.DB
 }
 
-func NewUserRepositoryAdaper(db *gorm.DB) *UserRepositoryAdapter {
+func NewUserRepositoryAdapter(db *gorm.DB) *UserRepositoryAdapter {
 	return &UserRepositoryAdapter{db: db}
 }
 

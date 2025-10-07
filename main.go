@@ -70,7 +70,7 @@ func main() {
 
 	db := infrastructure.NewPostgreAdapter(applicationConfig.Postgre.DSN)
 	healthCheckHandler := healthcheck.NewHealthCheckHandler()
-	userRepository := infrastructure.NewUserRepositoryAdaper(db)
+	userRepository := infrastructure.NewUserRepositoryAdapter(db)
 	userCreateHandler := user.NewUserCreateHandler(userRepository)
 	userGetHandler := user.NewUserGetHandler(userRepository)
 	userListHandler := user.NewUserListHandler(userRepository)
