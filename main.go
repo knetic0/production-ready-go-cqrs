@@ -8,7 +8,9 @@ import (
 	"time"
 
 	"github.com/go-playground/validator/v10"
+	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/knetic0/production-ready-go-cqrs/app/auth"
 	"github.com/knetic0/production-ready-go-cqrs/app/healthcheck"
 	"github.com/knetic0/production-ready-go-cqrs/app/user"
 	"github.com/knetic0/production-ready-go-cqrs/infrastructure"
@@ -74,6 +76,16 @@ func main() {
 	userCreateHandler := user.NewUserCreateHandler(userRepository)
 	userGetHandler := user.NewUserGetHandler(userRepository)
 	userListHandler := user.NewUserListHandler(userRepository)
+	loginHandler := auth.NewLoginHandler(userRepository, applicationConfig.Security)
+
+	app.Post("/login/", handle[auth.LoginRequest, auth.LoginResponse](loginHandler))
+
+	app.Use(jwtware.New(jwtware.Config{
+		SigningKey: jwtware.SigningKey{
+			JWTAlg: jwtware.HS256,
+			Key:    []byte(applicationConfig.Security.JwtSecretKey),
+		},
+	}))
 
 	app.Get("/healthcheck", handle[healthcheck.HealthCheckRequest, healthcheck.HealthCheckResponse](healthCheckHandler))
 	app.Post("/users/", handle[user.UserCreateRequest, user.UserCreateResponse](userCreateHandler))

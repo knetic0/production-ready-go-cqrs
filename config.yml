@@ -3,9 +3,15 @@ local:
     port: 8080
   postgre:
     dsn: "host=localhost user=postgres password=secret dbname=mydb port=5432 sslmode=disable"
+  security:
+    jwtSecretKey: "supersecretmykey"
+    minutesOfExpiration: 15
 
 prod:
   server:
     port: 80
   postgre:
     dsn: "host=localhost user=postgres password=secret dbname=mydb port=5432 sslmode=disable"
+  security:
+    jwtSecretKey: "supersecretmykey"
+    minutesOfExpiration: 15

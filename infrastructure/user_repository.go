@@ -27,6 +27,14 @@ func (r *UserRepositoryAdapter) Get(ctx context.Context, id string) (*domain.Use
 	return &u, nil
 }
 
+func (r *UserRepositoryAdapter) GetByEmail(ctx context.Context, email string) (*domain.User, error) {
+	var u domain.User
+	if err := r.db.WithContext(ctx).Where("email = ?", email).Take(&u).Error; err != nil {
+		return nil, err
+	}
+	return &u, nil
+}
+
 func (r *UserRepositoryAdapter) List(ctx context.Context) ([]domain.User, error) {
 	var users []domain.User
 	if err := r.db.WithContext(ctx).Find(&users).Error; err != nil {
