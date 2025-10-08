@@ -17,12 +17,12 @@ Accept: application/json
 ### Get User by ID
 GET http://localhost:8080/users/42bc5fe1-c4b8-437d-bbf6-d06a23099a50
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWV0QGV4YW1wbGUuY29tIiwiZXhwIjoxNzU5OTQ4NDg0LCJmdWxsTmFtZSI6IkFobWV0IFlpbGRpcmltIiwic3ViIjoiYzIxNDYzZDAtNzgzZS00YzhjLWIyMGYtMmNkZDAzYWNlMjZmIn0.VQeyigtGUO7ZF2nMQgiV9R1wIfDCkozcrOaDcxmpNf0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWV0QGV4YW1wbGUuY29tIiwiZXhwIjoxNzU5OTUwMDI0LCJmdWxsTmFtZSI6IkFobWV0IFlpbGRpcmltIiwic3ViIjoiYzIxNDYzZDAtNzgzZS00YzhjLWIyMGYtMmNkZDAzYWNlMjZmIn0.m4ytw_qKYjyxc1UXVlGXe4DAfwupg_CFxlGtcX8wRNE
 
 ### Get User List
 GET http://localhost:8080/users/
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWV0QGV4YW1wbGUuY29tIiwiZXhwIjoxNzU5OTQ4NDg0LCJmdWxsTmFtZSI6IkFobWV0IFlpbGRpcmltIiwic3ViIjoiYzIxNDYzZDAtNzgzZS00YzhjLWIyMGYtMmNkZDAzYWNlMjZmIn0.VQeyigtGUO7ZF2nMQgiV9R1wIfDCkozcrOaDcxmpNf0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1laG1ldEBleGFtcGxlLmNvbSIsImV4cCI6MTc1OTk1MDAwNSwiZnVsbE5hbWUiOiJNZWhtZXQgU29sYWsiLCJzdWIiOiJkYWQ3NmRiOS1kZTAzLTRkMmMtYmI4Yy1kYWQ1NGY3ZmY3NTcifQ.FWN7pIfi6jigOeFovMBl3ueWpqPAT-xubEjCehSQXCk
 
 ### Login
 POST http://localhost:8080/login/
@@ -30,11 +30,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "mehmet@example.com",
+  "email": "ahmet@example.com",
   "password": "secret123"
 }
 
 ### ME
 GET http://localhost:8080/user
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1laG1ldEBleGFtcGxlLmNvbSIsImV4cCI6MTc1OTk0ODY2MCwiZnVsbE5hbWUiOiJNZWhtZXQgU29sYWsiLCJzdWIiOiJkYWQ3NmRiOS1kZTAzLTRkMmMtYmI4Yy1kYWQ1NGY3ZmY3NTcifQ.O449Ap3iXMrYLmE5xYw6wQI_eoX1X8GqN2GD-TqRznY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWV0QGV4YW1wbGUuY29tIiwiZXhwIjoxNzU5OTUwMDI0LCJmdWxsTmFtZSI6IkFobWV0IFlpbGRpcmltIiwic3ViIjoiYzIxNDYzZDAtNzgzZS00YzhjLWIyMGYtMmNkZDAzYWNlMjZmIn0.m4ytw_qKYjyxc1UXVlGXe4DAfwupg_CFxlGtcX8wRNE

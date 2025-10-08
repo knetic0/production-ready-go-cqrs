@@ -79,7 +79,7 @@ func main() {
 	userGetHandler := user.NewUserGetHandler(userRepository)
 	userListHandler := user.NewUserListHandler(userRepository)
 	loginHandler := auth.NewLoginHandler(userRepository, refreshTokenRepository, applicationConfig.Security)
-	meHandler := user.NewMeHandler()
+	meHandler := user.NewMeHandler(userRepository)
 
 	app.Post("/login/", handle(loginHandler))
 
@@ -92,12 +92,7 @@ func main() {
 			token := c.Locals("user").(*jwt.Token)
 			claims := token.Claims.(jwt.MapClaims)
 			if sub, err := claims.GetSubject(); err == nil {
-				userContext := c.UserContext()
-				user, err := userRepository.Get(userContext, sub)
-				if err != nil {
-					return c.SendStatus(fiber.StatusForbidden)
-				}
-				ctx := context.WithValue(userContext, "user", user)
+				ctx := context.WithValue(c.UserContext(), "userId", sub)
 				c.SetUserContext(ctx)
 			}
 			return c.Next()
