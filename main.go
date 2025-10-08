@@ -73,10 +73,11 @@ func main() {
 	db := infrastructure.NewPostgreAdapter(applicationConfig.Postgre.DSN)
 	healthCheckHandler := healthcheck.NewHealthCheckHandler()
 	userRepository := infrastructure.NewUserRepositoryAdapter(db)
+	refreshTokenRepository := infrastructure.NewRefreshTokenRepositoryAdapter(db)
 	userCreateHandler := user.NewUserCreateHandler(userRepository)
 	userGetHandler := user.NewUserGetHandler(userRepository)
 	userListHandler := user.NewUserListHandler(userRepository)
-	loginHandler := auth.NewLoginHandler(userRepository, applicationConfig.Security)
+	loginHandler := auth.NewLoginHandler(userRepository, refreshTokenRepository, applicationConfig.Security)
 
 	app.Post("/login/", handle[auth.LoginRequest, auth.LoginResponse](loginHandler))
 

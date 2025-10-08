@@ -9,8 +9,9 @@ type PostgreConfig struct {
 }
 
 type SecurityConfig struct {
-	JwtSecretKey        string `mapstructure:"jwtSecretKey" yaml:"jwtSecretKey"`
-	MinutesOfExpiration int    `mapstructure:"minutesOfExpiration" yaml:"minutesOfExpiration"`
+	JwtSecretKey                  string `mapstructure:"jwtSecretKey" yaml:"jwtSecretKey"`
+	MinutesOfJwtExpiration        int    `mapstructure:"minutesOfJwtExpiration" yaml:"minutesOfJwtExpiration"`
+	HoursOfRefreshTokenExpiration int    `mapstructure:"hoursOfRefreshTokenExpiration" yaml:"hoursOfRefreshTokenExpiration"`
 }
 
 type ApplicationConfig struct {

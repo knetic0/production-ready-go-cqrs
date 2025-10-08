@@ -14,7 +14,7 @@ func NewPostgreAdapter(dsn string) *gorm.DB {
 		panic(fmt.Errorf("fatal error on postgre connection: %w", err))
 	}
 
-	if err := db.AutoMigrate(&domain.User{}); err != nil {
+	if err := db.AutoMigrate(&domain.User{}, &domain.RefreshToken{}); err != nil {
 		panic(fmt.Errorf("fatal error on postgre migration: %w", err))
 	}
 
