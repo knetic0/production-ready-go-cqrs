@@ -10,6 +10,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/knetic0/production-ready-go-cqrs/app/auth"
 	"github.com/knetic0/production-ready-go-cqrs/app/healthcheck"
 	"github.com/knetic0/production-ready-go-cqrs/app/user"
@@ -78,20 +79,36 @@ func main() {
 	userGetHandler := user.NewUserGetHandler(userRepository)
 	userListHandler := user.NewUserListHandler(userRepository)
 	loginHandler := auth.NewLoginHandler(userRepository, refreshTokenRepository, applicationConfig.Security)
+	meHandler := user.NewMeHandler()
 
-	app.Post("/login/", handle[auth.LoginRequest, auth.LoginResponse](loginHandler))
+	app.Post("/login/", handle(loginHandler))
 
 	app.Use(jwtware.New(jwtware.Config{
 		SigningKey: jwtware.SigningKey{
 			JWTAlg: jwtware.HS256,
 			Key:    []byte(applicationConfig.Security.JwtSecretKey),
 		},
+		SuccessHandler: func(c *fiber.Ctx) error {
+			token := c.Locals("user").(*jwt.Token)
+			claims := token.Claims.(jwt.MapClaims)
+			if sub, err := claims.GetSubject(); err == nil {
+				userContext := c.UserContext()
+				user, err := userRepository.Get(userContext, sub)
+				if err != nil {
+					return c.SendStatus(fiber.StatusForbidden)
+				}
+				ctx := context.WithValue(userContext, "user", user)
+				c.SetUserContext(ctx)
+			}
+			return c.Next()
+		},
 	}))
 
-	app.Get("/healthcheck", handle[healthcheck.HealthCheckRequest, healthcheck.HealthCheckResponse](healthCheckHandler))
-	app.Post("/users/", handle[user.UserCreateRequest, user.UserCreateResponse](userCreateHandler))
-	app.Get("/users/:id", handle[user.UserGetRequest, user.UserGetResponse](userGetHandler))
-	app.Get("/users/", handle[user.UserListRequest, user.UserListResponse](userListHandler))
+	app.Get("/healthcheck", handle(healthCheckHandler))
+	app.Post("/users/", handle(userCreateHandler))
+	app.Get("/users/:id", handle(userGetHandler))
+	app.Get("/users/", handle(userListHandler))
+	app.Get("/user", handle(meHandler))
 
 	if err := app.Listen(fmt.Sprintf("0.0.0.0:%s", applicationConfig.Server.Port)); err != nil {
 		os.Exit(1)
