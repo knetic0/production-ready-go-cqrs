@@ -20,7 +20,7 @@ func NewUserRepositoryAdapter(db *gorm.DB) *UserRepositoryAdapter {
 }
 
 func (r *UserRepositoryAdapter) Create(ctx context.Context, user *domain.User) error {
-	tracer := otel.Tracer("microservice-go/repository.user")
+	tracer := otel.Tracer("app-go/repository.user")
 	ctx, span := tracer.Start(ctx, "UserRepository.Create")
 	defer span.End()
 
@@ -41,7 +41,7 @@ func (r *UserRepositoryAdapter) Create(ctx context.Context, user *domain.User) e
 }
 
 func (r *UserRepositoryAdapter) Get(ctx context.Context, id string) (*domain.User, error) {
-	tracer := otel.Tracer("microservice-go/repository.user")
+	tracer := otel.Tracer("app-go/repository.user")
 	ctx, span := tracer.Start(ctx, "UserRepository.Get")
 	defer span.End()
 
@@ -62,7 +62,7 @@ func (r *UserRepositoryAdapter) Get(ctx context.Context, id string) (*domain.Use
 }
 
 func (r *UserRepositoryAdapter) GetByEmail(ctx context.Context, email string) (*domain.User, error) {
-	tracer := otel.Tracer("microservice-go/repository.user")
+	tracer := otel.Tracer("app-go/repository.user")
 	ctx, span := tracer.Start(ctx, "UserRepository.GetByEmail")
 	defer span.End()
 
@@ -83,7 +83,7 @@ func (r *UserRepositoryAdapter) GetByEmail(ctx context.Context, email string) (*
 }
 
 func (r *UserRepositoryAdapter) List(ctx context.Context) ([]domain.User, error) {
-	tracer := otel.Tracer("microservice-go/repository.user")
+	tracer := otel.Tracer("app-go/repository.user")
 	ctx, span := tracer.Start(ctx, "UserRepository.List")
 	defer span.End()
 
@@ -102,7 +102,7 @@ func (r *UserRepositoryAdapter) List(ctx context.Context) ([]domain.User, error)
 }
 
 func (r *UserRepositoryAdapter) getByField(ctx context.Context, field string, value any) (*domain.User, error) {
-	tracer := otel.Tracer("microservice-go/repository.user")
+	tracer := otel.Tracer("app-go/repository.user")
 	ctx, span := tracer.Start(ctx, "UserRepository.getByField")
 	defer span.End()
 
