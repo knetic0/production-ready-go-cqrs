@@ -15,7 +15,8 @@ type SecurityConfig struct {
 }
 
 type ApplicationConfig struct {
-	Server   ServerConfig   `mapstructure:"server" yaml:"server"`
-	Postgre  PostgreConfig  `mapstructure:"postgre" yaml:"postgre"`
-	Security SecurityConfig `mapstructure:"security" yaml:"security"`
+	Server            ServerConfig   `mapstructure:"server" yaml:"server"`
+	Postgre           PostgreConfig  `mapstructure:"postgre" yaml:"postgre"`
+	Security          SecurityConfig `mapstructure:"security" yaml:"security"`
+	OtelTraceEndpoint string         `mapstructure:"otel_trace_endpoint" yaml:"otel_trace_endpoint"`
 }

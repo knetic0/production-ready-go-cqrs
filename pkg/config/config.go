@@ -8,9 +8,10 @@ import (
 )
 
 const (
-	configName = "config"
-	configType = "yaml"
-	configPath = "$PWD/"
+	configName           = "config"
+	configType           = "yaml"
+	configPath           = "$PWD/"
+	configProductionPath = "/app"
 )
 
 func Read() *ApplicationConfig {
@@ -22,6 +23,7 @@ func Read() *ApplicationConfig {
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
 	viper.AddConfigPath(configPath)
+	viper.AddConfigPath(configProductionPath)
 
 	err := viper.ReadInConfig()
 	if err != nil {
